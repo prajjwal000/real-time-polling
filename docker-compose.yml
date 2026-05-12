@@ -3,8 +3,11 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro,Z
+      - /etc/ssl/certs/polling-selfsigned.crt:/etc/nginx/ssl/polling-selfsigned.crt:ro
+      - /etc/ssl/private/polling-selfsigned.key:/etc/nginx/ssl/polling-selfsigned.key:ro
     networks:
       - public_net
     depends_on:
