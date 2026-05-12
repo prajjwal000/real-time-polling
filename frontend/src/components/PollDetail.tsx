@@ -40,9 +40,9 @@ export function PollDetail() {
 
   useEffect(() => {
     if (!poll) return
-    fetchResults()
+    const id = setTimeout(fetchResults, 0)
     const interval = setInterval(fetchResults, 2000)
-    return () => clearInterval(interval)
+    return () => { clearTimeout(id); clearInterval(interval) }
   }, [poll, fetchResults])
 
   const handleVote = async (optionId: number) => {
